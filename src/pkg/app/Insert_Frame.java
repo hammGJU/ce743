@@ -905,13 +905,10 @@ public class Insert_Frame extends javax.swing.JFrame {
 
             } else if (notWorking_rdbtn.isSelected()) {
                 currentStatus = "Not Working and Not Seeking Job /";
-            }
-            else if(notSeeking_rdbtn.isSelected()){
+            } else if (notSeeking_rdbtn.isSelected()) {
                 currentStatus = "Not Seeking Job /";
             }
-            
-            
-                
+
             if (studying_chkBox.isSelected()) {
                 currentStatus += studying_chkBox.getText() + "/";
                 university1 = university1_txt.getText();
@@ -1136,7 +1133,7 @@ public class Insert_Frame extends javax.swing.JFrame {
             financeStudy_txt.setEnabled(false);
         }
     }//GEN-LAST:event_studying_chkBoxStateChanged
-    
+
     private void notWorking_rdbtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notWorking_rdbtnMousePressed
         if (employed_chkBox.isEnabled()) {
             employed_chkBox.setEnabled(false);
