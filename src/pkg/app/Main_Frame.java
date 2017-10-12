@@ -135,6 +135,7 @@ public class Main_Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void connect_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connect_btnActionPerformed
+
         
         try{
             File f = Login_Frame.filename;
