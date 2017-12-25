@@ -47,7 +47,7 @@
                 <artifactId>maven-glassfish-plugin</artifactId>
                 <version>2.1</version>
                 <configuration>
-                    <glassfishDirectory>/home/hesham/glassfish4/glassfish4/glassfish</glassfishDirectory>
+                    <glassfishDirectory>C:\\glassfish4\\glassfish</glassfishDirectory>
                     <user>admin</user>
                     <adminPassword>root</adminPassword>
                     <domain>

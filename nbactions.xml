@@ -7,4 +7,11 @@
                 <goal>glassfish:deploy</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-redeploy</actionName>
+            <displayName>redeploy</displayName>
+            <goals>
+                <goal>glassfish:redeploy</goal>
+            </goals>
+        </action>
     </actions>
