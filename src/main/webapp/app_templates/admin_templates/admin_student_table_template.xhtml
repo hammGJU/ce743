@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <div id="studentFilter" >
+
+        <h:form id="student_filter">
+
+
+            <p:messages id="msgs" closable="true" globalOnly="true"/>
+            <h:panelGrid id="searchStudents"
+                         style="float: #{langBean.styleFloat};" 
+                         columns="3"                              
+                         dir="#{langBean.dir}">
+                <p:outputLabel value="#{msgs.student_id}" for="student_id"/>
+                <p:inputText id="student_id"
+                             style="width:100px"
+                             value="#{addEditEventBean.nameEn}"                                      
+                             required="true"
+                             maxlength="512"
+                             requiredMessage="#{msgs.required_msg}"/>
+
+                <h:message for="student_id" styleClass="errorMsg"/>
+
+                <p:outputLabel value="#{msgs.student_school}" for="student_school"/>
+                <p:selectOneMenu value="#" id="student_school"
+                                 required="true" requiredMessage="#{msgs.required_msg}" >
+                    <f:selectItem itemLabel="#{msgs.select_one}" itemValue=""/>
+                    <f:selectItems var="department" value="#"
+                                   itemLabel="#{msgs.student_school}"
+                                   itemValue="#"/>
+                </p:selectOneMenu>
+                <h:message for="student_school" styleClass="errorMsg" />
+
+                <p:outputLabel value="#{msgs.student_department}" for="student_department"/>
+                <p:selectOneMenu value="#" id="student_department"
+                                 required="true" requiredMessage="#{msgs.required_msg}" >
+                    <f:selectItem itemLabel="#{msgs.select_one}" itemValue=""/>
+                    <f:selectItems var="department" value="#"
+                                   itemLabel="#{msgs.student_department}"
+                                   itemValue="#"/>
+                </p:selectOneMenu>
+                <h:message for="student_department" styleClass="errorMsg" />
+
+
+                <p:commandButton value="#{msgs.student_search}" styleClass="commandButton"
+                                 icon="ui-icon-search" iconPos="#"
+                                 ajax="false"
+                                 actionListener="#" />
+                <p:commandButton value="#{msgs.cancel}" styleClass="commandButton"
+                                 icon="ui-icon-cancel" iconPos="#"
+                                 immediate="true"
+                                 style="float:#{langBean.styleFloat}"                                                                   
+                                 action="page name" />
+                <h:outputLabel value=""/>
+
+            </h:panelGrid>
+        </h:form>
+
+    </div>
+
+    <div id="studentsTable" >
+        <p:dataTable var="students" value="#">
+            <p:column headerText="#{msgs.student_id}">
+                <h:outputText value="test"/>
+            </p:column>
+            <p:column headerText="#{msgs.student_fname_en}">
+                <h:outputText value="test"/>
+            </p:column>
+            <p:column headerText="#{msgs.student_lname_en}">
+                <h:outputText value="test"/>
+            </p:column>
+        </p:dataTable>
+    </div>
+
+</ui:composition>
