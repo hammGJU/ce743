@@ -9,10 +9,7 @@ import edu.gju.alumni.alumniapp.beans.UserSessionBean;
 import edu.gju.alumni.alumniapp.models.Student;
 import edu.gju.alumni.alumniapp.utils.PopulateModels;
 import edu.gju.alumni.alumniapp.utils.StudentTableEnum;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -23,15 +20,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.ejb.Local;
 import javax.ejb.PostActivate;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 /**
  *
