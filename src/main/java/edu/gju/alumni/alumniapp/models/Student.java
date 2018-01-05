@@ -7,6 +7,7 @@ package edu.gju.alumni.alumniapp.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -20,17 +21,20 @@ public class Student implements Serializable {
     private String lastName;
     private Date dateOfBirth;
     private String nationality;
-    private String school;
-    private String department;
-    private String degree;
-    private Double gpa;
-    private String gender;
-    private String status;
-    private Double yearsExperience;
+    private School school;
+    private Department department;
+    private Degree degree;
+    private double gpa;
+    private Gender gender;
+    private StudentStatus status;
+    private double yearsExperience;
     private String facebookLink;
     private String linkedInLink;
-    private String gradYear;
-    private String gradSemester;
+    private String email1;
+    private String email2;
+    private GraduationYear gradYear;
+    private GraduationSemester gradSemester;
+    private StudentJob studentJob;
 
     public String getId() {
         return id;
@@ -72,59 +76,59 @@ public class Student implements Serializable {
         this.nationality = nationality;
     }
 
-    public String getSchool() {
+    public School getSchool() {
         return school;
     }
 
-    public void setSchool(String school) {
+    public void setSchool(School school) {
         this.school = school;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 
-    public String getDegree() {
+    public Degree getDegree() {
         return degree;
     }
 
-    public void setDegree(String degree) {
+    public void setDegree(Degree degree) {
         this.degree = degree;
     }
 
-    public Double getGpa() {
+    public double getGpa() {
         return gpa;
     }
 
-    public void setGpa(Double gpa) {
+    public void setGpa(double gpa) {
         this.gpa = gpa;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
-    public String getStatusId() {
+    public StudentStatus getStatus() {
         return status;
     }
 
-    public void setStatusId(String statusId) {
-        this.status = statusId;
+    public void setStatus(StudentStatus status) {
+        this.status = status;
     }
 
-    public Double getYearsExperience() {
+    public double getYearsExperience() {
         return yearsExperience;
     }
 
-    public void setYearsExperience(Double yearsExperience) {
+    public void setYearsExperience(double yearsExperience) {
         this.yearsExperience = yearsExperience;
     }
 
@@ -144,29 +148,52 @@ public class Student implements Serializable {
         this.linkedInLink = linkedInLink;
     }
 
-    public String getGradYear() {
+    public String getEmail1() {
+        return email1;
+    }
+
+    public void setEmail1(String email1) {
+        this.email1 = email1;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public void setEmail2(String email2) {
+        this.email2 = email2;
+    }
+
+    public GraduationYear getGradYear() {
         return gradYear;
     }
 
-    public void setGradYear(String gradYear) {
+    public void setGradYear(GraduationYear gradYear) {
         this.gradYear = gradYear;
     }
 
-    public String getGradSemester() {
+    public GraduationSemester getGradSemester() {
         return gradSemester;
     }
 
-    public void setGradSemester(String gradSemester) {
+    public void setGradSemester(GraduationSemester gradSemester) {
         this.gradSemester = gradSemester;
+    }
+
+    public StudentJob getStudentJob() {
+        return studentJob;
+    }
+
+    public void setStudentJob(StudentJob studentJob) {
+        this.studentJob = studentJob;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.firstName);
-        hash = 37 * hash + Objects.hashCode(this.lastName);
-        hash = 37 * hash + Objects.hashCode(this.gender);
+        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.firstName);
+        hash = 23 * hash + Objects.hashCode(this.lastName);
         return hash;
     }
 
@@ -191,33 +218,12 @@ public class Student implements Serializable {
         if (!Objects.equals(this.lastName, other.lastName)) {
             return false;
         }
-        if (!Objects.equals(this.nationality, other.nationality)) {
-            return false;
-        }
-        if (!Objects.equals(this.school, other.school)) {
-            return false;
-        }
-        if (!Objects.equals(this.department, other.department)) {
-            return false;
-        }
-        if (!Objects.equals(this.degree, other.degree)) {
-            return false;
-        }
-        if (!Objects.equals(this.dateOfBirth, other.dateOfBirth)) {
-            return false;
-        }
-        if (!Objects.equals(this.gpa, other.gpa)) {
-            return false;
-        }
-        if (!Objects.equals(this.gender, other.gender)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", nationality=" + nationality + ", shcool=" + school + ", department=" + department + ", degree=" + degree + ", gpa=" + gpa + ", statusId=" + status + ", gradYear=" + gradYear + ", gradSemester=" + gradSemester + '}';
+        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", nationality=" + nationality + ", gpa=" + gpa + ", email1=" + email1 + ", email2=" + email2 + '}';
     }
 
 }

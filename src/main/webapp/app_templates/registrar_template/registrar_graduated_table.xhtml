@@ -6,58 +6,124 @@
 
 
 
-    <div >
+    <p:tabView id="tabs">
+        <div >
+            <p:tab title="#{msgs.expected_graduate}" id="grads" >
+                <h:form id="form_grads" >
+                    <p:dataTable id="graduatedStudentsTable" style="margin-bottom:0" var="students"
+                                 value="#{studentBean.studentList}" rowKey="#{students.id}" rows="5" rowsPerPageTemplate="5, 10, 20" selection="#{studentBean.listOfStudents}"
+                                 emptyMessage="#{msgs.no_data}" paginator="true" paginatorPosition="top"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 >
+                        <p:ajax event="rowSelectCheckbox" update=":tabs:form_grads:graduatedStudentsTable"/>
+                        <f:facet name="header" class="ui-datatable-header">
+                            <p:outputPanel >
+                                <!--<p:inputText id="globalFilter" style="float: top;width:150px" onkeyup="PF('graduatedStudentsTable').filter()"  placeholder="Enter keyword"/>-->
+                                <h:outputText style="float: top" value="#{msgs.expected_graduate}" />
+                            </p:outputPanel>
+                        </f:facet>
+                        <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                        <p:column  id="sid" headerText="#{msgs.student_id}" filterBy="#{students.id}" filterMatchMode="contains"
+                                   sortBy="#{students.id}">
+                            <h:outputText value="#{students.id}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.student_fname_en}" filterBy="#{students.firstName}" filterMatchMode="contains"
+                                  sortBy="#{students.firstName}">
+                            <h:outputText value="#{students.firstName}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.student_lname_en}" filterBy="#{students.lastName}" filterMatchMode="contains"
+                                  sortBy="#{students.lastName}">
+                            <h:outputText value="#{students.lastName}" />
+                        </p:column>
 
-        <h:form id="form">
+                        <f:facet name="footer">
+                            <p:toolbar style="border: none">
+                                <p:toolbarGroup>
+                                    <p:commandButton value="#{msgs.view}" styleClass="commandButton"
+                                                     style="float: left" 
+                                                     disabled="#{studentBean.listOfStudents==null}"
+                                                     icon="ui-icon-edit" iconPos="1"
+                                                     ajax="true"                                                                  
+                                                     action="/registrar/send_emails" />
+                                </p:toolbarGroup>
+                            </p:toolbar>
+                        </f:facet>
+                    </p:dataTable>
+                </h:form>
+            </p:tab>
+        </div>
 
-            <p:dataTable id="graduatedStudentsTable" style="margin-bottom:0">
-                <f:facet name="header" class="ui-datatable-header">
+        <div>
+            <p:tab title="#{msgs.cleared_students}" id="clears">
+                <h:form id="form_cleared" >
+                    <p:growl id="growl" showDetail="true" />
+                    <p:dataTable id="clearedStudentsTable" style="margin-bottom:0" var="student"
+                                 value="#{studentBean.studentList}" rowKey="#{student.id}" rows="5" rowsPerPageTemplate="5, 10, 20" selection="#{studentBean.selectedStudent}"
+                                 emptyMessage="#{msgs.no_data}" paginator="true" paginatorPosition="top"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 >
+                        <p:ajax event="rowSelectRadio"
+                                update=":tabs:form_cleared:clearedStudentsTable"/>
+                        <f:facet name="header" class="ui-datatable-header">
+                            <p:outputPanel >
+                                <!--<p:inputText id="globalFilter" style="float: top;width:150px" onkeyup="PF('graduatedStudentsTable').filter()"  placeholder="Enter keyword"/>-->
+                                <h:outputText style="float: top" value="#{msgs.cleared_students}" />
+                            </p:outputPanel>
+                        </f:facet>
+                        <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                        <p:column  id="sid" headerText="#{msgs.student_id}" filterBy="#{student.id}" filterMatchMode="contains"
+                                   sortBy="#{student.id}">
+                            <h:outputText value="#{student.id}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.student_fname_en}" filterBy="#{student.firstName}" filterMatchMode="contains"
+                                  sortBy="#{student.firstName}">
+                            <h:outputText value="#{student.firstName}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.student_lname_en}" filterBy="#{student.lastName}" filterMatchMode="contains"
+                                  sortBy="#{student.lastName}">
+                            <h:outputText value="#{student.lastName}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.student_department}" filterBy="#{student.department.departmentName}" filterMatchMode="contains"
+                                  sortBy="#{student.department.departmentName}">
+                            <h:outputText value="#{student.department.departmentName}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.student_school}" filterBy="#{student.school.shcoolName}" filterMatchMode="contains"
+                                  sortBy="#{student.school.shcoolName}">
+                            <h:outputText value="#{student.school.shcoolName}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.status}" filterBy="#{student.status.statusName}" filterMatchMode="contains"
+                                  sortBy="#{student.status.statusName}">
+                            <h:outputText value="#{student.status.statusName}" />
+                        </p:column>
+                        <f:facet name="footer" class="ui-datatable-footer">
+                            <p:toolbar style="border: none">
+                                <p:toolbarGroup>
+                                    <p:commandButton style="float: left" value="#{msgs.view}" icon="ui-icon-search" 
+                                                     disabled="#{studentBean.selectedStudent==null}"
+                                                     actionListener="#{studentBean.saveSelectedItemId()}"
+                                                     onclick="PF('clrDlg').show();"/>
+    <!--                                    <p:commandButton style="float: left" value="#{msgs.cancel}" 
+                                                     icon="ui-icon-minus" onclick="PF('multiStudentDialog').show();"/>-->
+                                </p:toolbarGroup>
+                            </p:toolbar>
 
-                    <!--                    <p:outputPanel >-->
-                    <p:inputText id="globalFilter" style="float:right;width:150px" onkeyup="PF('graduatedStudentsTable').filter()"  placeholder="Enter keyword"/>
-                    <h:outputText style="float:right" value="Search all fields:" />
-
-
-
-                    <!--                    </p:outputPanel>-->
-                </f:facet>
-                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-                <p:column headerText="Student ID" filterBy="#{msgs.student_id}" filterMatchMode="contains">
-                    <h:outputText value="test" />
-                </p:column>
-                <p:column headerText="First Name" filterBy="#{msgs.student_fname_en}" filterMatchMode="contains">
-                    <h:outputText value="test" />
-                </p:column>
-                <p:column headerText="Last Name" filterBy="#{msgs.student_lname_en}" filterMatchMode="contains">
-                    <h:outputText value="test" />
-                </p:column>
-                <p:column headerText="Department" filterBy="#{msgs.student_department}" filterMatchMode="contains">
-                    <h:outputText value="test" />
-                </p:column>
-                <p:column headerText="School" filterBy="#{msgs.student_school}" filterMatchMode="contains">
-                    <h:outputText value="test" />
-                </p:column>
-                <p:column headerText="" style="width: 20px">
-                    <h:outputText value="test" />
-                </p:column>
-                <f:facet name="footer" class="ui-datatable-footer">
-                    <p:commandButton style="float: left" value="Remove" icon="ui-icon-minus" onclick="PF('multiStudentDialog').show();"/>
-                    <p:commandButton style="float: left" value="View" icon="ui-icon-search" onclick="PF('multiStudentDialog').show();"/>
-
-                </f:facet>
-                <!--                <f:facet name="footer">
-                                    <p:commandButton process="checkbox" update="growl" icon="ui-icon-search" value="View" oncomplete="PF.('multiStudentDialog').show();"/>
-                                </f:facet>-->
-            </p:dataTable>
-
-            <p:dialog id="dialog" header="Selected Students" widgetVar="multiStudentDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="220">
-                <p:outputPanel id="panel" style="text-align:center;">
-                    <ui:repeat value="arraylist that holds students" var="student">
-                        <h:outputText value="#{msgs.student_id} - #{msgs.student_department}" style="display:block"/>
-                    </ui:repeat>
-                </p:outputPanel>
-            </p:dialog>
-
-        </h:form>
-    </div>
+                        </f:facet>
+                        <!--                <f:facet name="footer">
+                                            <p:commandButton process="checkbox" update="growl" icon="ui-icon-search" value="View" oncomplete="PF.('multiStudentDialog').show();"/>
+                                        </f:facet>-->
+                    </p:dataTable>
+                    <p:dialog id="dialog" header="Selected Students" widgetVar="clrDlg" 
+                              modal="true" showEffect="fade" hideEffect="fade" resizable="true" 
+                              width="220" dynamic="true">
+                        <p:outputPanel id="panel" style="text-align:center;">
+                            <ui:repeat value="#{studentBean.selectedStudent}" var="std">
+                                <h:outputText value="#{student.id} - #{student.department}" style="display:block"/>
+                                <h:outputText value="#{student.id} - #{student.department}" style="display:block"/>
+                            </ui:repeat>
+                        </p:outputPanel>
+                    </p:dialog>
+                </h:form>
+            </p:tab>
+        </div>
+    </p:tabView>
 </ui:composition>

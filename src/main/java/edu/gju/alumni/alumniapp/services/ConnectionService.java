@@ -5,12 +5,13 @@
  */
 package edu.gju.alumni.alumniapp.services;
 
-import edu.gju.alumni.alumniapp.daos.ConnDAO;
+import edu.gju.alumni.alumniapp.daos.annotations.ConnDAO;
 import edu.gju.alumni.alumniapp.daos.ConnectionDAO;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.ejb.PostActivate;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
@@ -23,7 +24,7 @@ import javax.inject.Inject;
 public class ConnectionService {
 
     private Connection connection;
-    
+
     @Inject
     @ConnDAO
     private ConnectionDAO connectionDao;
@@ -35,6 +36,7 @@ public class ConnectionService {
     }
 
     @PostConstruct
+    @PostActivate
     public void init() {
         try {
             connection = connectionDao.getConnection();

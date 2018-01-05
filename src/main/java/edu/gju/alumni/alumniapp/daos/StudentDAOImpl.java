@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package edu.gju.alumni.alumniapp.daos;
-//My name is slimshady
+
+import edu.gju.alumni.alumniapp.daos.annotations.StdDAO;
 import edu.gju.alumni.alumniapp.beans.UserSessionBean;
+import edu.gju.alumni.alumniapp.models.Email;
 import edu.gju.alumni.alumniapp.models.Student;
+import edu.gju.alumni.alumniapp.utils.AlumniServEnum;
 import edu.gju.alumni.alumniapp.utils.PopulateModels;
-import edu.gju.alumni.alumniapp.utils.StudentTableEnum;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Date;
@@ -71,20 +73,32 @@ public class StudentDAOImpl extends ConnectionDAOImpl implements StudentDAO, Ser
     @Override
     public List<Student> getAllStudents() throws SQLException {
         List<Student> allStudents = new ArrayList<>();
-        PreparedStatement ps = connection.prepareStatement(StudentTableEnum.GET_ALL_STUDENTS.toString());
+        PreparedStatement ps = connection.prepareStatement(AlumniServEnum.GET_ALL_STUDENTS.toString());
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             Student s = PopulateModels.populateStudent(rs);
             allStudents.add(s);
         }
+
         rs.close();
         ps.close();
         return allStudents;
     }
 
     @Override
+    public List<Email> getStudentEmail(String studentId) throws SQLException {
+        List<Email> emails = new ArrayList<>();
+        PreparedStatement ps = connection.prepareStatement(AlumniServEnum.GET_STUDENT_EMAIL.toString());
+        ps.setString(1, studentId);
+        ResultSet rs = ps.executeQuery();
+        emails = PopulateModels.populateEmail(rs);
+        return emails;
+
+    }
+
+    @Override
     public Student getStudentById(int id) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement(StudentTableEnum.GET_STUDENT_BY_ID.toString());
+        PreparedStatement ps = connection.prepareStatement(AlumniServEnum.GET_STUDENT_BY_ID.toString());
         ps.setString(1, Integer.toString(id));
         ResultSet rs = ps.executeQuery();
         Student student = new Student();
@@ -99,22 +113,22 @@ public class StudentDAOImpl extends ConnectionDAOImpl implements StudentDAO, Ser
 
     @Override
     public int addStudent(Student student) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement(StudentTableEnum.INSERT_STUDENT.toString());
+        PreparedStatement ps = connection.prepareStatement(AlumniServEnum.INSERT_STUDENT.toString());
         ps.setString(1, student.getFirstName());
         ps.setString(2, student.getLastName());
-        ps.setDate(3, (Date) student.getDateOfBirth());
+        ps.setDate(3, new Date(student.getDateOfBirth().getTime()));
         ps.setString(4, student.getNationality());
-        ps.setString(5, student.getSchool());
-        ps.setString(6, student.getDepartment());
-        ps.setString(7, student.getDegree());
+        ps.setString(5, student.getSchool().getId());
+        ps.setString(6, student.getDepartment().getId());
+        ps.setInt(7, student.getDegree().getId());
         ps.setDouble(8, student.getGpa());
-        ps.setString(9, student.getGender());
-        ps.setString(10, student.getStatusId());
+        ps.setString(9, student.getGender().getId());
+        ps.setString(10, student.getStatus().getId());
         ps.setDouble(11, student.getYearsExperience());
         ps.setString(12, student.getFacebookLink());
         ps.setString(13, student.getLinkedInLink());
-        ps.setString(14, student.getGradYear());
-        ps.setString(15, student.getGradSemester());
+        ps.setString(14, student.getGradYear().getId());
+        ps.setString(15, student.getGradSemester().getId());
 
         int result = ps.executeUpdate();
         ps.close();
@@ -123,22 +137,22 @@ public class StudentDAOImpl extends ConnectionDAOImpl implements StudentDAO, Ser
 
     @Override
     public int editStudent(Student student) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement(StudentTableEnum.EDIT_STUDENT.toString());
+        PreparedStatement ps = connection.prepareStatement(AlumniServEnum.EDIT_STUDENT.toString());
         ps.setString(1, student.getFirstName());
         ps.setString(2, student.getLastName());
         ps.setDate(3, (Date) student.getDateOfBirth());
         ps.setString(4, student.getNationality());
-        ps.setString(5, student.getSchool());
-        ps.setString(6, student.getDepartment());
-        ps.setString(7, student.getDegree());
+        ps.setString(5, student.getSchool().getId());
+        ps.setString(6, student.getDepartment().getId());
+        ps.setInt(7, student.getDegree().getId());
         ps.setDouble(8, student.getGpa());
-        ps.setString(9, student.getGender());
-        ps.setString(10, student.getStatusId());
+        ps.setString(9, student.getGender().getId());
+        ps.setString(10, student.getStatus().getId());
         ps.setDouble(11, student.getYearsExperience());
         ps.setString(12, student.getFacebookLink());
         ps.setString(13, student.getLinkedInLink());
-        ps.setString(14, student.getGradYear());
-        ps.setString(15, student.getGradSemester());
+        ps.setString(14, student.getGradYear().getId());
+        ps.setString(15, student.getGradSemester().getId());
         ps.setString(16, student.getId());
 
         int result = ps.executeUpdate();
@@ -148,7 +162,7 @@ public class StudentDAOImpl extends ConnectionDAOImpl implements StudentDAO, Ser
 
     @Override
     public int deleteStudent(int studentId) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement(StudentTableEnum.DELETE_STUDENT.toString());
+        PreparedStatement ps = connection.prepareStatement(AlumniServEnum.DELETE_STUDENT.toString());
         ps.setString(1, Integer.toString(studentId));
         int result = ps.executeUpdate();
         ps.close();

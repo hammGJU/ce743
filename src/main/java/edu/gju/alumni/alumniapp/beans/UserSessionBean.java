@@ -27,7 +27,7 @@ public class UserSessionBean implements Serializable {
     private String userName;
     private String userPassword;
     private Connection connection;
-    private int selectedItemId;
+    private String selectedItemId;
     private int menuIndex = 0;
 
     @Inject
@@ -58,7 +58,7 @@ public class UserSessionBean implements Serializable {
         if (success) {
             if (facesContext != null) {
 
-                navHandler.handleNavigation(facesContext, null, "/dsa/dsa_employee_first_page?faces-redirect=true");
+                navHandler.handleNavigation(facesContext, null, "/registrar/registrar_first_page?faces-redirect=true");
             }
         }
 
@@ -112,11 +112,11 @@ public class UserSessionBean implements Serializable {
         this.connection = connection;
     }
 
-    public int getSelectedItemId() {
+    public String getSelectedItemId() {
         return selectedItemId;
     }
 
-    public void setSelectedItemId(int selectedItemId) {
+    public void setSelectedItemId(String selectedItemId) {
         this.selectedItemId = selectedItemId;
     }
 

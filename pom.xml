@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.gju.alumni</groupId>
-    <artifactId>AlumniServices1</artifactId>
+    <artifactId>AlumniServices1-abdullah</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>AlumniServices1</name>
+    <name>AlumniServices1-abdullah</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -36,6 +36,16 @@
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>javax.activation-api</artifactId>
+            <version>1.2.0</version>
         </dependency>
         
     </dependencies>

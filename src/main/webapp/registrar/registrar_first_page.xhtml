@@ -10,13 +10,9 @@
     </h:head>
     <h:body>
         <ui:decorate template="/app_templates/general_templates/app_template.xhtml">
-            <p:tabView>
-                <p:tab title="Grduated Students">
-                    <ui:insert name="registrarView">
-                        <ui:include src="/app_templates/registrar_template/registrar_graduated_table.xhtml"/>
-                    </ui:insert>
-                </p:tab>
-            </p:tabView>
+            <ui:insert name="registrarView">
+                <ui:include src="/app_templates/registrar_template/registrar_graduated_table.xhtml"/>
+            </ui:insert>
         </ui:decorate>
     </h:body>
 </html>

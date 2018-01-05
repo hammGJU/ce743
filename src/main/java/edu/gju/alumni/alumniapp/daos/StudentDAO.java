@@ -5,6 +5,8 @@
  */
 package edu.gju.alumni.alumniapp.daos;
 
+import edu.gju.alumni.alumniapp.models.Degree;
+import edu.gju.alumni.alumniapp.models.Email;
 import edu.gju.alumni.alumniapp.models.Student;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,9 +17,11 @@ import javax.ejb.Local;
  * @author hesham
  */
 @Local(ConnectionDAO.class)
-public interface StudentDAO extends ConnectionDAO{
+public interface StudentDAO extends ConnectionDAO {
 
     public List<Student> getAllStudents() throws SQLException;
+
+    public List<Email> getStudentEmail(String studentId) throws SQLException;
 
     public Student getStudentById(int id) throws SQLException;
 

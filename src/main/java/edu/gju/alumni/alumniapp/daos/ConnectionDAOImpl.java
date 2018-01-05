@@ -5,6 +5,7 @@
  */
 package edu.gju.alumni.alumniapp.daos;
 
+import edu.gju.alumni.alumniapp.daos.annotations.ConnDAO;
 import java.io.Serializable;
 import java.sql.Connection;
 import javax.annotation.Resource;
